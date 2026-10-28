@@ -1,10 +1,10 @@
 ---
-title: 状态看板
+layout: page
 pageClass: pm-wide-page
 sidebar: false
-lastUpdated: false
-contributors: false
-editLink: false
+aside: false
+outline: false
+title: 状态看板
 ---
 
 # 状态看板

@@ -1,0 +1,100 @@
+/**
+ * 全局样式：品牌色 + 页面宽度 + 变量对齐
+ *
+ * VitePress 的文本变量是 --vp-c-text-1/2/3，组件里沿用了
+ * VuePress 时代的 --vp-c-text / --vp-c-text-mute / --vp-c-text-subtle，
+ * 这里做一层别名，组件样式无需改动。
+ */
+
+:root {
+  --pm-brand: #2f6bff;
+  --pm-brand-2: #7c3aed;
+
+  --vp-c-brand-1: #2f6bff;
+  --vp-c-brand-2: #4b80ff;
+  --vp-c-brand-3: #6b96ff;
+  --vp-c-brand-soft: rgb(47 107 255 / 14%);
+
+  --vp-c-text: var(--vp-c-text-1);
+  --vp-c-text-mute: var(--vp-c-text-2);
+  --vp-c-text-subtle: var(--vp-c-text-3);
+  --vp-c-shadow: rgb(0 0 0 / 15%);
+}
+
+.dark {
+  --pm-brand: #7aa2ff;
+  --pm-brand-2: #a78bfa;
+
+  --vp-c-brand-1: #7aa2ff;
+  --vp-c-brand-2: #93b4ff;
+  --vp-c-brand-3: #a9c3ff;
+  --vp-c-brand-soft: rgb(122 162 255 / 16%);
+}
+
+/* ---- 页面宽度 ---- */
+.pm-wide-page .VPPage {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 36px 32px 96px;
+}
+
+.pm-detail-page .VPPage {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 36px 32px 96px;
+}
+
+@media (max-width: 719px) {
+  .pm-wide-page .VPPage,
+  .pm-detail-page .VPPage {
+    padding: 20px 18px 72px;
+  }
+}
+
+/* ---- layout: page 没有 .vp-doc，补基础排版 ---- */
+.VPPage h1 {
+  margin: 0 0 12px;
+  font-size: 30px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.VPPage h2 {
+  margin: 28px 0 12px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 650;
+}
+
+.VPPage p {
+  line-height: 1.7;
+}
+
+/* 提示块在 page 布局里也保持可读 */
+.VPPage .custom-block {
+  margin: 20px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-radius: 10px;
+  background: var(--vp-c-bg-soft);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.VPPage .custom-block .custom-block-title {
+  margin-bottom: 2px;
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+
+.VPPage .custom-block p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+}
+
+.VPPage .custom-block.tip {
+  border-left-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}

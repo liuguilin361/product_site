@@ -18,7 +18,8 @@
 }
 ```
 
-保存后重启 `npm run dev`（或重新构建）即可生效——产品列表、看板、详情页都会同步。
+保存后执行 `npm run gen`（`npm run dev` / `npm run build` 会自动执行），
+产品列表、看板、详情页会一起更新。
 
 ## 完整字段
 
@@ -51,8 +52,20 @@
 - `model` / `name` / `category` / `status` 缺失
 - `category` / `status` 使用了未定义的 key
 
+校验逻辑在 `src/.vitepress/config.mts` 中。
+
 ## 详情页是怎么来的
 
-`src/.vuepress/config.js` 的 `onInitialized` 钩子会根据产品数据
-动态注入 `/products/<id>.html` 路由，页面内容统一由 `<ProductDetail>` 组件渲染。
-**不需要手工创建 markdown 文件**，也不会有生成物残留。
+`scripts/gen-products.mjs` 会根据产品数据生成 `src/products/<id>.md`：
+
+```md
+---
+layout: page
+pageClass: pm-detail-page
+---
+<ProductDetail id="qdk201" />
+```
+
+- `npm run dev` / `npm run build` 会自动先执行生成
+- 从数据中删除产品后，对应页面会在下次生成时自动清理
+- 生成页顶部有 `AUTO-GENERATED` 标记，**不要手工编辑**

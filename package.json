@@ -1,19 +1,16 @@
 {
   "name": "product-management-site",
-  "version": "2.0.0",
-  "description": "Product management site built with VuePress",
+  "version": "3.0.0",
+  "description": "Product management site built with VitePress",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vuepress dev src",
-    "build": "vuepress build src",
-    "docs:clean-dev": "vuepress dev src --clean-cache"
+    "gen": "node scripts/gen-products.mjs",
+    "dev": "npm run gen && vitepress dev src",
+    "build": "npm run gen && vitepress build src",
+    "preview": "vitepress preview src"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-rc.19",
-    "@vuepress/theme-default": "^2.0.0-rc.19",
-    "sass": "^1.105.0",
-    "vue": "^3.4.0",
-    "vuepress": "^2.0.0-rc.19"
+    "vitepress": "^1.6.4"
   }
 }

@@ -1,13 +1,14 @@
-# VuePress temp directory
+# VitePress cache / build output
+src/.vitepress/cache
+src/.vitepress/dist
+
+# Legacy VuePress directories（迁移完成后可删除）
 src/.vuepress/.temp
-# VuePress cache directory
 src/.vuepress/.cache
-# VuePress build output
 src/.vuepress/dist
 
 # IGA
 .iga
-
 .iga/
 
 # Local configuration and credentials

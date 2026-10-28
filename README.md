@@ -1,6 +1,6 @@
 # 产品管理平台（Product Hub）
 
-基于 [VuePress 2](https://v2.vuepress.vuejs.org/) 的静态产品管理站点，部署于火山引擎 AGI Pages。
+基于 [VitePress 1](https://vitepress.dev/) 的静态产品管理站点，部署于火山引擎 AGI Pages。
 
 ## 功能
 
@@ -14,8 +14,9 @@
 
 ```bash
 npm install
-npm run dev     # http://localhost:8080
-npm run build   # 产物：src/.vuepress/dist
+npm run dev      # http://localhost:5173
+npm run build    # 产物：src/.vitepress/dist
+npm run preview  # 本地预览构建产物
 ```
 
 ## 数据维护
@@ -39,21 +40,33 @@ npm run build   # 产物：src/.vuepress/dist
 
 > 仓库内为**示例数据**，请按实际情况替换 `status` / `owner` / `specs` 等字段。
 
-详情页路由由 `src/.vuepress/config.js` 的 `onInitialized` 钩子根据数据动态注入，
-无需手工创建页面文件；构建时会自动校验数据（必填字段、id 唯一、分类/状态合法性）。
+`npm run dev` / `npm run build` 会先执行 `npm run gen`，由
+[`scripts/gen-products.mjs`](scripts/gen-products.mjs) 根据数据生成
+`src/products/<id>.md` 详情页（自动清理已删除产品的页面）。
+构建时还会校验数据（必填字段、id 唯一、分类/状态合法性），有问题直接报错。
+
+## 目录结构
+
+```
+scripts/gen-products.mjs        # 数据 → 详情页生成脚本
+src/.vitepress/config.mts       # 站点配置（导航、侧边栏、数据校验）
+src/.vitepress/theme/           # 主题入口、样式、产品组件
+src/data/products.js            # 唯一数据源
+src/products/                   # 产品目录页 + 生成的详情页
+src/guide/                      # 使用说明
+src/board.md · src/index.md     # 看板 / 首页
+```
 
 ## 部署到 AGI Pages
 
 | 配置项 | 值 |
 | --- | --- |
-| Build Command | `npm run build`（或 `vuepress build src`） |
-| Output Directory | `src/.vuepress/dist` |
+| Install Command | `npm ci`（或 `npm install`） |
+| Build Command | `npm run build` |
+| Output Directory | `src/.vitepress/dist` |
 
-```bash
-iga pages build
-iga pages deploy
-```
+> 从 VuePress 迁移过来后，需在 AGI Pages 控制台把构建命令与产物目录改成上面的值。
 
 ## 技术栈
 
-VuePress 2（Vite bundler） · Vue 3 · 默认主题 + 自定义组件
+VitePress 1.6（Vite + Vue 3） · 默认主题 + 自定义组件 · 数据驱动生成页面
