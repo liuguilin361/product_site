@@ -1,0 +1,49 @@
+/**
+ * 全局样式：品牌色 + 页面宽度 + 少量通用排版微调
+ */
+
+:root {
+  --pm-brand: #2f6bff;
+  --pm-brand-2: #7c3aed;
+
+  // 覆盖默认主题强调色，使导航/侧边栏与品牌一致
+  --vp-c-accent: #2f6bff;
+  --vp-c-accent-bg: #2f6bff;
+  --vp-c-accent-hover: #4b80ff;
+  --vp-c-accent-soft: rgb(47 107 255 / 12%);
+}
+
+[data-theme='dark'] {
+  --pm-brand: #7aa2ff;
+  --pm-brand-2: #a78bfa;
+
+  --vp-c-accent: #7aa2ff;
+  --vp-c-accent-bg: #5b87f0;
+  --vp-c-accent-hover: #93b4ff;
+  --vp-c-accent-soft: rgb(122 162 255 / 16%);
+}
+
+// 产品页使用更宽的版心
+.pm-wide-page {
+  --content-width: 1180px;
+}
+
+// 详情页略窄
+.pm-detail-page {
+  --content-width: 980px;
+}
+
+// 首页/目录页去掉内容区多余留白
+.pm-wide-page [vp-content] {
+  padding-top: 2.4rem;
+}
+
+// 目录页不要 markdown 内容区默认的大标题间距
+.pm-catalog-page [vp-content] > h1:first-child {
+  margin-top: 0;
+}
+
+// 表格在窄屏可横向滚动
+.pm-table-wrap {
+  -webkit-overflow-scrolling: touch;
+}

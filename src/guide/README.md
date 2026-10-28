@@ -1,21 +1,41 @@
-# Introduction
+# 使用说明
 
-VuePress is a **Vue-powered Static Site Generator** with a minimalist design.
+这是一个**静态产品管理站点**：所有页面由数据驱动，一次修改、全站同步。
 
-## How It Works
+## 三个入口
 
-A VuePress site is a single-page application (SPA) powered by [Vue](https://vuejs.org/), [Vue Router](https://router.vuejs.org/) and [webpack](https://webpack.js.org/). During the build, the pages are pre-rendered into static HTML, which then becomes an SPA after being loaded in the browser.
+| 页面 | 地址 | 用途 |
+| --- | --- | --- |
+| 首页 | `/` | 产品总数、阶段分布、最近更新 |
+| [产品目录](/products/) | `/products/` | 卡片 / 表格视图，支持搜索与筛选 |
+| [状态看板](/board.html) | `/board.html` | 按阶段分列，看清每条产品线进度 |
 
-Each Markdown file is compiled into HTML with [markdown-it](https://github.com/markdown-it/markdown-it) and then processed as the template of a Vue component. This allows you to directly use Vue inside your Markdown files, and is great when you need to embed dynamic content.
+每个产品还有独立详情页：`/products/<id>.html`，包含规格表、亮点、里程碑与文档入口。
 
-## Features
+## 数据流
 
-- **Markdown Extensions**: VuePress comes with many built-in markdown extensions designed to make technical documentation writing easy.
-- **Vue in Markdown**: Each markdown file is compiled into HTML and then processed as a Vue single-file component, so you can use Vue components directly in your markdown files.
-- **Custom Themes**: VuePress supports developing custom themes in Vue.
-- **Default Theme**: VuePress ships with a responsive default theme, including a navigation bar, a sidebar, a search box, and more.
+```
+src/data/products.js             ← 唯一数据源（手工维护）
+        │
+        ├─► 首页 / 目录 / 看板组件直接读取
+        │
+        └─► .vuepress/config.js 的 onInitialized 钩子
+                └─► 动态注入 /products/<id>.html 路由（无需生成文件）
+```
 
-## Next Steps
+- 改产品数据 → 只改 `src/data/products.js`
+- 改站点结构 → 改 `src/.vuepress/config.js` 与 `src/` 下的页面
+- 改视觉样式 → 改 `src/.vuepress/styles/index.scss` 或组件内的 `<style scoped>`
 
-- Read the [Getting Started](./getting-started.md) guide.
-- Learn about [Configuration](./configuration.md).
+## 本地运行
+
+```bash
+npm install
+npm run dev     # http://localhost:8080
+npm run build   # 产物：src/.vuepress/dist
+```
+
+## 下一步
+
+- [新增 / 编辑产品](./getting-started.md)
+- [数据结构与部署](./configuration.md)

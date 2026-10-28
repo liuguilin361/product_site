@@ -1,8 +1,9 @@
 {
-  "name": "vuepress-demo",
-  "version": "1.0.0",
-  "description": "A VuePress Demo",
+  "name": "product-management-site",
+  "version": "2.0.0",
+  "description": "Product management site built with VuePress",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src",

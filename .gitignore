@@ -13,3 +13,9 @@ src/.vuepress/dist
 # Local configuration and credentials
 .env*
 !.env.example
+
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
